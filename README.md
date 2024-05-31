@@ -4,7 +4,10 @@ You can type in the terminal in order to run the search with `extractEntities` f
 
 ### Screenshots
 
-Coming...
+![image](https://github.com/kamilniftaliev/foodstyles/assets/6189175/a11ada88-3dca-4de1-b12f-c7b68f0e7464)
+
+![image](https://github.com/kamilniftaliev/foodstyles/assets/6189175/49a23819-9988-45cb-bf68-48ea6df1bf53)
+
 
 ### Setup
 
