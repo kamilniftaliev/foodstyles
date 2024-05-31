@@ -1,1 +1,1 @@
-export const SKIP_WORDS = ["in"];
+export const SKIP_WORDS = ["in", "or"];

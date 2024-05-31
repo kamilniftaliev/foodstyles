@@ -1,35 +1,24 @@
-import http from "http";
-import express from "express";
-import bodyParser from "body-parser";
-import { Request, Response } from "express";
-
 import { extractEntities } from "./search";
+import { createInterface } from "readline";
 
-const port = 3000;
-const app = express();
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.get("*", async (req: Request, res: Response) => {
-  const entities = await extractEntities(req.query.search as string);
-
-  res.status(200).json({
-    entities,
-  });
+const readline = createInterface({
+  input: process.stdin,
+  output: process.stdout,
 });
 
-const server = http.createServer(app);
+function askToSearch() {
+  readline.question(
+    "\nType and press Enter to search...\n\n",
+    (searchTerm: string) => {
+      extractEntities(searchTerm);
 
-// Support API querying too.
-server.listen(port, async () => {
-  console.log(`API started at http://localhost:${port}`);
+      askToSearch();
+    }
+  );
+}
 
-  const entities = await extractEntities("McDonald's");
-  await extractEntities("McDonald's in London");
-  await extractEntities("vegan sushi in London");
-  await extractEntities("Veg sushi");
-  await extractEntities("McDonalds in London or Manchester");
+(async () => {
+  await extractEntities("Sushi in London or Manchester");
 
-  // console.log("entities", entities);
-});
+  askToSearch();
+})();
